@@ -1,0 +1,46 @@
+const mongoose = require("mongoose");
+const memberSchema = new mongoose.Schema({
+    first_name: {
+        required: true,
+        type: String,
+    },
+    last_name: {
+        required: true,
+        type: String,
+    },
+    twitch_username: {
+        required: true,
+        unique: true,
+        type: String,
+    },
+    pronouns: {
+        required: true,
+        type: String,
+    },
+    phone: {
+        required: true,
+        type: String,
+    },
+    photo: {
+        required: true,
+        type: String,
+    },
+    birth_day: {
+        required: true,
+        type: Number,
+    },
+    birth_month: {
+        required: true,
+        type: Number,
+    },
+    birth_year: {
+        required: true,
+        type: Number,
+    },
+},
+{
+    versionKey:false,
+}
+);
+
+module.exports = mongoose.model("member", memberSchema);
