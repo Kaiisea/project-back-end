@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
+
 const members = require("./Controller/memberController");
 const login = require("./Controller/loginController");
-const shop = require("./Controller/shopController");
+const schedule = require("./Controller/scheduleController");
 
 // Access of the environment variables
 require("dotenv").config();
@@ -24,10 +26,11 @@ database.once("connected", ()=>{
 });
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use("/members", members);
 app.use("/login", login);
-app.use("/shop", shop);
+app.use("/schedule", schedule);
 
 
 app.listen(port, ()=>{

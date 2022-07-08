@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { generateToken, verifyRefreshToken } = require("../lib/utils");
 
-
 // User register
 router.post("/new", async (req, res) => {
   const data = new Model({
@@ -18,14 +17,14 @@ router.post("/new", async (req, res) => {
     .then((data) => {
       res.status(201).json({
         status: "succeeded",
-        data,
+        data: [{ message: "User successfully created" }, data],
         error: null,
       });
     })
     .catch((error) => {
       res.status(404).json({
         status: "failed",
-        data,
+        data: [],
         error: error.message,
       });
     });
@@ -36,7 +35,7 @@ router.post("/", (req, res) => {
   Model.find({ email: req.body.email })
     .exec()
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       if (result.length > 0) {
         bcrypt.compare(
           req.body.password,
@@ -52,6 +51,7 @@ router.post("/", (req, res) => {
               res.status(201).json({
                 status: "succeeded",
                 data: {
+                  info: (result[0]),
                   token: generateToken(result, false),
                   refreshToken: generateToken(result, true),
                 },
@@ -60,7 +60,7 @@ router.post("/", (req, res) => {
             } else {
               res.status(403).json({
                 status: "failed",
-                data,
+                data: [],
                 error: "Wrong username or password",
               });
             }
@@ -69,7 +69,7 @@ router.post("/", (req, res) => {
       } else {
         res.status(403).json({
           status: "failed",
-          data,
+          data: [],
           error: "Wrong username or password",
         });
       }
@@ -77,7 +77,7 @@ router.post("/", (req, res) => {
     .catch((error) => {
       res.status(404).json({
         status: "failed",
-        data,
+        data: [],
         error: error.message,
       });
     });
@@ -100,19 +100,19 @@ router.post("/refresh", verifyRefreshToken, (req, res) => {
     const token = authHeader.split(" ")[1];
     let payload = [jwt.decode(token)];
     res.status(201).json({
-        status: "succeeded",
-        data: {
-          token: generateToken(payload, false),
-          refreshToken: generateToken(payload, true),
-        },
-        error: null,
-      });
+      status: "succeeded",
+      data: {
+        token: generateToken(payload, false),
+        refreshToken: generateToken(payload, true),
+      },
+      error: null,
+    });
   } catch (error) {
     res.status(404).json({
-        status: "failed",
-        data: [],
-        error: error.message,
-      });
+      status: "failed",
+      data: [],
+      error: error.message,
+    });
   }
 });
 
