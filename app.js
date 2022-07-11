@@ -5,6 +5,7 @@ const cors = require('cors')
 const members = require("./Controller/memberController");
 const login = require("./Controller/loginController");
 const schedule = require("./Controller/scheduleController");
+const event = require("./Controller/eventController");
 
 // Access of the environment variables
 require("dotenv").config();
@@ -31,6 +32,7 @@ app.use(express.json());
 app.use("/members", members);
 app.use("/login", login);
 app.use("/schedule", schedule);
+app.use("/event", event);
 
 
 app.listen(port, ()=>{

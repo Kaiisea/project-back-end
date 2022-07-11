@@ -1,9 +1,11 @@
-const express = require('express');
-const Model = require("../Model/scheduleModel");
+const express = require("express");
+const Model = require("../Model/eventModel");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 
-// Get all collections 
-router.get("/" , (req, res) => {
+// Get all registrations
+router.get("/",(req, res) => {
     Model.find().then((data) => {
         res.status(200).json({
             status: 'succeeded',
@@ -39,11 +41,9 @@ router.get("/:id", (req, res) => {
 // Post document 
 router.post("/", (req, res) => {
     const data = new Model({
-        day: req.body.day,
-        month: req.body.month,
-        hour: req.body.hour,
-        event: req.body.event,
-        cover: req.body.cover,
+        twitch_username: req.body.twitch_username,
+        email: req.body.email,
+        formId: req.body.formId,
     });
     data.save().then((data) => {
         res.status(201).json({
