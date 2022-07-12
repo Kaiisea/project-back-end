@@ -65,7 +65,6 @@ router.post("/", (req, res) => {
         twitch_username: req.body.twitch_username,
         pronouns: req.body.pronouns,
         phone: req.body.phone,
-        photo: req.body.photo,
         birth_day: req.body.birth_day,
         birth_month: req.body.birth_month,
         birth_year: req.body.birth_year,

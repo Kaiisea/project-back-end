@@ -21,10 +21,6 @@ const memberSchema = new mongoose.Schema({
         required: true,
         type: Number,
     },
-    photo: {
-        required: true,
-        type: String,
-    },
     birth_day: {
         required: true,
         type: Number,
