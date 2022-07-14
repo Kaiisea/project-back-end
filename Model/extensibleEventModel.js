@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const eventSchema = new mongoose.Schema({
+const extensibleEventSchema = new mongoose.Schema({
     twitch_username: {
         required: true,
         unique: true,
@@ -10,13 +10,10 @@ const eventSchema = new mongoose.Schema({
         unique: true,
         type: String,
     },
-    formId: {
-        type: String,
-    }
 },
 {
     versionKey:false,
 }
 );
 
-module.exports = mongoose.model("event", eventSchema);
+module.exports = mongoose.model("extensibleEvent", extensibleEventSchema);

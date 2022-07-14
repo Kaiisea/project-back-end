@@ -5,7 +5,10 @@ const cors = require('cors')
 const members = require("./Controller/memberController");
 const login = require("./Controller/loginController");
 const schedule = require("./Controller/scheduleController");
-const event = require("./Controller/eventController");
+const minecraftEvent = require("./Controller/minecraftEventController");
+const extensibleEvent = require("./Controller/extensibleEventController");
+const specialEvent = require("./Controller/specialEventController");
+const birthdayEvent = require("./Controller/birthdayEventController");
 
 // Access of the environment variables
 require("dotenv").config();
@@ -33,7 +36,10 @@ app.use(express.json());
 app.use("/members", members);
 app.use("/login", login);
 app.use("/schedule", schedule);
-app.use("/event", event);
+app.use("/minecraftEvent", minecraftEvent);
+app.use("/extensibleEvent", extensibleEvent);
+app.use("/specialEvent", specialEvent);
+app.use("/birthdayEvent", birthdayEvent);
 
 
 app.listen(port, ()=>{

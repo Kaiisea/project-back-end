@@ -1,5 +1,5 @@
 const express = require("express");
-const Model = require("../Model/eventModel");
+const Model = require("../Model/minecraftEventModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
@@ -43,7 +43,6 @@ router.post("/", (req, res) => {
     const data = new Model({
         twitch_username: req.body.twitch_username,
         email: req.body.email,
-        formId: req.body.formId,
     });
     data.save().then((data) => {
         res.status(201).json({
